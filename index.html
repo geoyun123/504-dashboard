@@ -3,116 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>鼓山高中504｜第一次定期評量</title>
+<title>鼓山高中 504｜第一次定期評量</title>
 <style>
 *{box-sizing:border-box}
 :root{
-  --bg:#f2efe9;--card:#fbfaf7;--line:#dcd6ce;--text:#343230;
-  --muted:#756f68;--dark:#403e3b;--orange:#d9784c;--orange-soft:#f3e1d6;
-  --soft:#ebe7e0;--absent:#ead6d1
+  --bg:#f3efe8; --card:#fffdfa; --ink:#302f2d; --muted:#77716b;
+  --line:#ded8cf; --dark:#403e3b; --orange:#dc774c; --orange-soft:#f5dfd2;
 }
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif}
-header{height:52px;padding:0 22px;background:var(--dark);color:#faf8f3;display:flex;align-items:center;justify-content:space-between}
-header h1{font-size:21px;margin:0;letter-spacing:.5px}
-.header-tag{border:1px solid #77736d;border-radius:18px;padding:6px 14px;font-size:13px}
-.dashboard{height:calc(100vh - 52px);padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.column{min-width:0;display:grid;gap:12px}
-.left{grid-template-rows:auto 1fr}
-.right{grid-template-rows:auto 1fr}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 2px 8px rgba(50,45,40,.04)}
-.clock-card{padding:16px 20px;text-align:center}
-.date{font-size:20px;color:var(--muted);font-weight:600}
-.clock{font-size:58px;line-height:1.05;font-weight:800;letter-spacing:2px;margin:7px 0}
-.count-label{font-size:17px;font-weight:700;color:#5d5853}
-.countdown{font-size:32px;font-weight:800;color:var(--orange);margin-top:3px}
-.status{margin-top:9px;background:var(--soft);border-radius:14px;padding:9px 12px;font-size:16px;font-weight:700}
-.title{font-size:21px;font-weight:800;margin-bottom:10px}
-.schedule-card{padding:14px 18px;overflow:hidden}
-.schedule-list{display:grid}
-.schedule-row{display:grid;grid-template-columns:150px 1fr;align-items:center;min-height:47px;border-bottom:1px solid #e2ddd6;padding:4px 12px;font-size:18px;font-weight:700}
-.schedule-row:last-child{border-bottom:0}
-.schedule-row .time{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px}
-.schedule-row.active{background:var(--orange-soft);border-left:5px solid var(--orange);border-radius:10px;color:#bf5d35}
-.top-right{display:grid;grid-template-columns:.92fr 1.08fr;gap:12px}
-.attendance,.reminder{padding:16px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{background:var(--soft);border-radius:13px;text-align:center;padding:11px 5px}
-.stat span{display:block;color:var(--muted);font-size:14px}
-.stat strong{display:block;font-size:27px;margin-top:2px}
-.reminder{position:relative;overflow:hidden;min-height:190px;padding-right:16px}
-.reminder .title{position:relative;z-index:2}
-.reminder ul{position:relative;z-index:2;margin:5px 0 0;padding-left:20px;font-size:15px;line-height:1.65}
-
-.seat-card{padding:14px 18px;display:flex;flex-direction:column;min-height:0}
-.seat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
-.seat-head .title{margin:0}
-.board{width:46%;height:28px;margin:0 auto 9px;background:#5a5651;color:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;letter-spacing:8px}
-.seats{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;align-content:start}
-.seat,.seat-gap{min-height:47px}
-.seat{border:1px solid #d9d2c9;background:#f8f6f2;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.15s}
-.seat:hover{transform:translateY(-1px)}
-.seat .num{font-size:16px;font-weight:800}
-.seat .seat-status{font-size:11px;color:#99938c;margin-top:1px}
-.seat.absent{background:var(--absent);border-color:#cfaaa0}
-.seat.absent .seat-status{color:#9e5748;font-weight:800}
-.seat-note{text-align:center;color:var(--muted);font-size:12px;margin-top:8px}
-@media(max-width:1000px){
-  .dashboard{height:auto;grid-template-columns:1fr}
-  .top-right{grid-template-columns:1fr 1fr}
-}
-@media(max-width:650px){
-  header h1{font-size:16px}.header-tag{display:none}.dashboard{padding:8px}
-  .top-right{grid-template-columns:1fr}.reminder{padding-right:16px}
-  .schedule-row{grid-template-columns:115px 1fr;font-size:16px}
-  .seats{gap:4px}.seat{min-height:43px}.seat .num{font-size:14px}
-}
-@media(max-height:850px) and (min-width:1001px){
-  .dashboard{padding:10px;gap:10px}.column{gap:9px}
-  .clock-card{padding:11px 16px}.clock{font-size:50px}.date{font-size:17px}
-  .countdown{font-size:27px}.status{padding:7px}
-  .schedule-card,.attendance,.reminder,.seat-card{padding:11px 14px}
-  .schedule-row{min-height:41px;font-size:16px}
-  .top-right{gap:9px}.reminder{min-height:165px}
-  .seat,.seat-gap{min-height:41px}
-}
+html,body{margin:0;width:100%;height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink)}
+body{overflow:hidden}
+header{height:56px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-weight:800}
+header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22px;padding:7px 16px;font-size:14px;font-weight:500}
+.dashboard{height:calc(100vh - 56px);padding:14px 16px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.left,.right{min-width:0;display:grid;gap:14px}.left{grid-template-rows:270px 1fr}.right{grid-template-rows:190px 1fr}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.clock-card{padding:18px 22px;text-align:center}.date{font-size:22px;font-weight:700;color:#69645f}.clock{font-size:64px;font-weight:850;letter-spacing:2px;line-height:1.1;margin:8px 0}
+.count-label{font-size:19px;font-weight:700;color:#625d58}.countdown{font-size:34px;font-weight:850;color:var(--orange);margin-top:4px}.current{margin-top:10px;padding:10px;border-radius:13px;background:#eee9e1;font-size:17px;font-weight:750}
+.schedule{padding:16px 20px;overflow:hidden}.title{font-size:23px;font-weight:850;margin:0 0 12px}.schedule-row{display:grid;grid-template-columns:160px 1fr;align-items:center;min-height:48px;padding:0 12px;border-bottom:1px solid var(--line);font-size:19px;font-weight:700}
+.schedule-row:last-child{border-bottom:0}.schedule-row.active{background:var(--orange-soft);border-left:5px solid var(--orange);border-radius:11px;color:#c95d34}.time{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px}
+.top-right{display:grid;grid-template-columns:1fr 1.25fr;gap:14px}.attendance,.reminder{padding:17px 18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#eee9e1;border-radius:14px;text-align:center;padding:10px 5px}.stat span{display:block;color:#716c66;font-size:14px}.stat strong{display:block;font-size:28px;margin-top:2px}
+.absent-list{margin-top:10px;font-size:15px;font-weight:750}.absent-list b{color:var(--orange)}
+.reminder ul{margin:8px 0 0;padding-left:23px;font-size:16px;line-height:1.55}
+.seat-card{padding:15px 18px;overflow:hidden}.seat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.seat-head .title{margin:0}.legend{font-size:13px;color:var(--muted)}
+.board{width:38%;margin:0 auto 9px;background:#5d5955;color:#fff;text-align:center;border-radius:8px;padding:6px;font-size:13px;letter-spacing:8px}
+.seats{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(5,1fr);gap:7px;height:calc(100% - 78px)}
+.seat{border:1px solid #d9d2c8;border-radius:10px;background:#fbf9f5;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;font-size:20px;font-weight:850;transition:.15s}
+.seat:hover{transform:translateY(-1px);border-color:#bdb4a8}.seat.absent{background:var(--orange-soft);border:2px solid var(--orange);color:#b84f2c}.seat.empty{visibility:hidden;pointer-events:none}
+@media(max-width:1000px){body{overflow:auto}.dashboard{height:auto;grid-template-columns:1fr}.left,.right{grid-template-rows:auto}.clock-card{min-height:250px}.schedule{min-height:390px}.top-right{grid-template-columns:1fr}.seat-card{min-height:500px}}
 </style>
 </head>
 <body>
-<header>
-  <h1>鼓山高中 504｜第一次定期評量</h1>
-  <div class="header-tag">504 Exam Dashboard</div>
-</header>
-
+<header><h1>鼓山高中 504｜第一次定期評量</h1><div class="tag">504 Exam Dashboard</div></header>
 <main class="dashboard">
-  <section class="column left">
+  <section class="left">
     <div class="card clock-card">
-      <div class="date" id="dateText">日期</div>
+      <div class="date" id="date">日期</div>
       <div class="clock" id="clock">00:00:00</div>
       <div class="count-label" id="countLabel">準備今天的考試</div>
       <div class="countdown" id="countdown">--:--</div>
-      <div class="status" id="statusText">目前狀態：準備中</div>
+      <div class="current" id="current">目前狀態：準備中</div>
     </div>
-
-    <div class="card schedule-card">
-      <div class="title">✎ 今日考程</div>
-      <div class="schedule-list" id="scheduleList"></div>
+    <div class="card schedule">
+      <h2 class="title">✎ 今日考程</h2>
+      <div id="schedule"></div>
     </div>
   </section>
 
-  <section class="column right">
+  <section class="right">
     <div class="top-right">
       <div class="card attendance">
-        <div class="title">▣ 504 出缺席</div>
+        <h2 class="title">▣ 504 出缺席</h2>
         <div class="stats">
-          <div class="stat"><span>應到</span><strong id="totalCount">27</strong></div>
+          <div class="stat"><span>應到</span><strong>27</strong></div>
           <div class="stat"><span>實到</span><strong id="presentCount">27</strong></div>
-          <div class="stat"><span>未到</span><strong id="absentCount">0</strong></div>
+          <div class="stat"><span>缺席</span><strong id="absentCount">0</strong></div>
         </div>
+        <div class="absent-list">缺席座號：<b id="absentNumbers">—</b></div>
       </div>
-
       <div class="card reminder">
-        <div class="title">導師小叮嚀</div>
+        <h2 class="title">導師小叮嚀</h2>
         <ul>
           <li>鐘響前請收妥課本與個人物品</li>
           <li>記得寫上班級、姓名與座號</li>
@@ -122,139 +71,76 @@ header h1{font-size:21px;margin:0;letter-spacing:.5px}
     </div>
 
     <div class="card seat-card">
-      <div class="seat-head"><div class="title">504 座位表｜學生視角</div></div>
+      <div class="seat-head">
+        <h2 class="title">504 座位表｜學生視角</h2>
+        <div class="legend">點一下：缺席｜再點一下：恢復到班</div>
+      </div>
       <div class="board">黑 板</div>
       <div class="seats" id="seats"></div>
-      <div class="seat-note">點一下：缺席｜再點一下：恢復到班</div>
     </div>
   </section>
 </main>
 
 <script>
-const TOTAL_STUDENTS = 27;
-
-/* 學生視角：依提供的504座位表旋轉為面向黑板的方向。
-   null 代表實際空位。 */
-const seatLayout = [
-  [null, 19, 22, 9, 15, null],
-  [25, 14, 7, 18, 2, 23],
-  [5, 12, 6, 8, 1, 16],
-  [21, 20, 4, 17, 13, 11],
-  [null, 3, 10, 24, 27, 26]
+const TOTAL_STUDENTS=27;
+const schedule=[
+ ["08:10","09:00","國文"],["09:15","10:05","英文"],["10:20","11:10","數學"],
+ ["11:10","12:30","午餐、打掃"],["12:30","13:10","午休"],
+ ["13:20","14:10","歷史"],["14:25","15:15","地理"]
 ];
-
-const seatStates = {};
-for (let i=1;i<=TOTAL_STUDENTS;i++) seatStates[i]=0; // 0到班 1缺席
-
-const schedule = [
-  {start:"08:10",end:"09:00",name:"國文"},
-  {start:"09:15",end:"10:05",name:"英文"},
-  {start:"10:20",end:"11:10",name:"數學"},
-  {start:"11:10",end:"12:30",name:"午餐、打掃"},
-  {start:"12:30",end:"13:10",name:"午休"},
-  {start:"13:20",end:"14:10",name:"歷史"},
-  {start:"14:25",end:"15:15",name:"地理"}
+const seatLayout=[
+ [null,19,22,9,15,null],
+ [25,14,7,18,2,23],
+ [5,12,6,8,1,16],
+ [21,20,4,17,13,11],
+ [null,3,10,24,27,26]
 ];
+const absent=new Set();
 
 function mins(t){const [h,m]=t.split(":").map(Number);return h*60+m}
-function buildSchedule(){
-  const box=document.getElementById("scheduleList");
-  box.innerHTML="";
-  schedule.forEach((s,i)=>{
-    const row=document.createElement("div");
-    row.className="schedule-row";
-    row.id="schedule-"+i;
-    row.innerHTML=`<div class="time">${s.start} – ${s.end}</div><div>${s.name}</div>`;
-    box.appendChild(row);
-  });
+function renderSchedule(active=-1){
+ const box=document.getElementById("schedule"); box.innerHTML="";
+ schedule.forEach((r,i)=>{
+   const d=document.createElement("div");d.className="schedule-row"+(i===active?" active":"");
+   d.innerHTML=`<span class="time">${r[0]} – ${r[1]}</span><span>${r[2]}</span>`;box.appendChild(d);
+ });
 }
-function buildSeats(){
-  const box=document.getElementById("seats");
-  box.innerHTML="";
-  seatLayout.flat().forEach(n=>{
-    if(n===null){
-      const gap=document.createElement("div");
-      gap.className="seat-gap";
-      box.appendChild(gap);
-      return;
-    }
-    const seat=document.createElement("div");
-    seat.className="seat";
-    seat.id="seat-"+n;
-    seat.innerHTML=`<div class="num">${n}</div><div class="seat-status">到班</div>`;
-    seat.addEventListener("click",()=>changeSeat(n));
-    box.appendChild(seat);
-  });
-}
-function changeSeat(n){
-  seatStates[n]=seatStates[n]===0?1:0;
-  const seat=document.getElementById("seat-"+n);
-  const text=seat.querySelector(".seat-status");
-  if(seatStates[n]===1){seat.classList.add("absent");text.textContent="缺席"}
-  else{seat.classList.remove("absent");text.textContent="到班"}
-  updateAttendance();
+function renderSeats(){
+ const box=document.getElementById("seats");box.innerHTML="";
+ seatLayout.flat().forEach(n=>{
+   const d=document.createElement("div");
+   if(n===null){d.className="seat empty";}
+   else{
+     d.className="seat"+(absent.has(n)?" absent":"");
+     d.textContent=n;
+     d.onclick=()=>{absent.has(n)?absent.delete(n):absent.add(n);renderSeats();updateAttendance();}
+   }
+   box.appendChild(d);
+ });
 }
 function updateAttendance(){
-  const absent=Object.values(seatStates).filter(v=>v===1).length;
-  document.getElementById("totalCount").textContent=TOTAL_STUDENTS;
-  document.getElementById("presentCount").textContent=TOTAL_STUDENTS-absent;
-  document.getElementById("absentCount").textContent=absent;
-}
-function fmt(sec){
-  sec=Math.max(0,Math.floor(sec));
-  const m=Math.floor(sec/60),s=sec%60;
-  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+ const nums=[...absent].sort((a,b)=>a-b);
+ document.getElementById("presentCount").textContent=TOTAL_STUDENTS-nums.length;
+ document.getElementById("absentCount").textContent=nums.length;
+ document.getElementById("absentNumbers").textContent=nums.length?nums.join("、"):"—";
 }
 function updateClock(){
-  const now=new Date();
-  const days=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
-  document.getElementById("dateText").textContent=
-    `${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${days[now.getDay()]}`;
-  document.getElementById("clock").textContent=now.toLocaleTimeString("zh-TW",{hour12:false});
-
-  const cur=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
-  let active=-1;
-  schedule.forEach((s,i)=>{
-    const row=document.getElementById("schedule-"+i);
-    row.classList.remove("active");
-    if(cur>=mins(s.start)&&cur<mins(s.end)) active=i;
-  });
-
-  const label=document.getElementById("countLabel");
-  const cd=document.getElementById("countdown");
-  const status=document.getElementById("statusText");
-
-  if(active>=0){
-    const s=schedule[active];
-    document.getElementById("schedule-"+active).classList.add("active");
-    label.textContent=`【${s.name}】結束倒數`;
-    const end=new Date(now);
-    const [h,m]=s.end.split(":").map(Number);
-    end.setHours(h,m,0,0);
-    cd.textContent=fmt((end-now)/1000);
-    status.textContent=`目前狀態：${s.name}`;
-    return;
-  }
-
-  const next=schedule.find(s=>cur<mins(s.start));
-  if(next){
-    label.textContent=`【${next.name}】開始倒數`;
-    const start=new Date(now);
-    const [h,m]=next.start.split(":").map(Number);
-    start.setHours(h,m,0,0);
-    cd.textContent=fmt((start-now)/1000);
-    status.textContent=`目前狀態：等待 ${next.name}`;
-  }else{
-    label.textContent="今日考程結束";
-    cd.textContent="完成";
-    status.textContent="目前狀態：放學";
-  }
+ const now=new Date(), h=now.getHours(), m=now.getMinutes(), s=now.getSeconds(), cur=h*60+m;
+ const days=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+ document.getElementById("date").textContent=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${days[now.getDay()]}`;
+ document.getElementById("clock").textContent=[h,m,s].map(v=>String(v).padStart(2,"0")).join(":");
+ let active=-1,next=-1;
+ schedule.forEach((r,i)=>{if(cur>=mins(r[0])&&cur<mins(r[1]))active=i;if(next<0&&cur<mins(r[0]))next=i;});
+ renderSchedule(active);
+ let label,current,target;
+ if(active>=0){label=`【${schedule[active][2]}】結束倒數`;current=`目前狀態：${schedule[active][2]}`;target=mins(schedule[active][1])*60;}
+ else if(next>=0){label=`【${schedule[next][2]}】開始倒數`;current=`目前狀態：等待 ${schedule[next][2]}`;target=mins(schedule[next][0])*60;}
+ else{label="今日考程已結束";current="目前狀態：考程結束";target=null;}
+ document.getElementById("countLabel").textContent=label;document.getElementById("current").textContent=current;
+ if(target===null)document.getElementById("countdown").textContent="完成";
+ else{let diff=Math.max(0,target-(h*3600+m*60+s));document.getElementById("countdown").textContent=`${String(Math.floor(diff/60)).padStart(2,"0")}:${String(diff%60).padStart(2,"0")}`;}
 }
-buildSchedule();
-buildSeats();
-updateAttendance();
-updateClock();
-setInterval(updateClock,1000);
+renderSeats();updateAttendance();updateClock();setInterval(updateClock,1000);
 </script>
 </body>
 </html>
