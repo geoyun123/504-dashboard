@@ -347,6 +347,59 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   letter-spacing:.5px;
 }
 
+
+/* ===== 右上資訊區舒展版 ===== */
+
+/* 出席區：避免四個資訊框互相擠壓 */
+.attendance{
+  grid-template-columns:150px 1fr;
+  grid-template-rows:auto auto;
+  column-gap:18px;
+  row-gap:10px;
+  padding:14px 20px;
+}
+.attendance .title{
+  grid-row:1 / 3;
+  align-self:center;
+}
+.attendance .stats{
+  grid-column:2;
+  grid-row:1;
+  grid-template-columns:repeat(3,minmax(105px,1fr));
+  gap:14px;
+}
+.attendance .stat{
+  min-height:88px;
+  padding:10px 12px;
+}
+.attendance .absent-list{
+  grid-column:2;
+  grid-row:2;
+  min-height:48px;
+  width:100%;
+  padding:9px 15px;
+}
+.reset-attendance{
+  position:absolute;
+  right:20px;
+  bottom:14px;
+  padding:7px 11px;
+  font-size:12px;
+}
+.attendance{position:relative}
+.attendance .absent-list{padding-right:105px}
+
+/* 導師叮嚀：稍微縮字並增加行距，不再擠成一團 */
+.reminder{
+  grid-template-columns:170px 1fr;
+  padding:10px 20px;
+}
+.reminder ul{
+  font-size:19px;
+  line-height:1.45;
+  gap:2px;
+}
+
 </style>
 </head>
 <body>
