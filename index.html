@@ -269,6 +269,37 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   margin:0 auto 7px;
 }
 
+
+/* ===== 導師叮嚀與座位間距微調 ===== */
+
+/* 導師叮嚀：三行 23px */
+.reminder ul{
+  font-size:23px;
+  line-height:1.22;
+  gap:0;
+}
+
+/* 座位格縮小，字體維持 28px；增加格子之間的留白 */
+.seats{
+  height:calc(100% - 73px);
+  gap:12px 14px;
+  padding:5px 10px 8px;
+}
+.seat{
+  font-size:28px;
+  font-weight:900;
+  width:88%;
+  height:82%;
+  min-height:0;
+  justify-self:center;
+  align-self:center;
+}
+
+/* 黑板仍對齊第一排四個座位縮小後的視覺寬度 */
+.board{
+  width:59%;
+}
+
 </style>
 </head>
 <body>
