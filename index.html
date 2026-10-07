@@ -400,6 +400,72 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   gap:2px;
 }
 
+
+/* ===== 右側溢出修正版 ===== */
+
+/* 關鍵：Grid 子項允許真正縮小，不再把右欄撐出 viewport */
+.dashboard,.right,.top-right,.attendance,.reminder,.seat-card{min-width:0}
+.attendance>*,
+.reminder>*,
+.seat-card>*{min-width:0}
+
+/* 出席區重新用固定可控欄寬，全部收在右欄內 */
+.attendance{
+  grid-template-columns:140px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  column-gap:14px;
+  row-gap:8px;
+  padding:12px 18px;
+  overflow:hidden;
+}
+.attendance .stats{
+  width:100%;
+  min-width:0;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.attendance .stat{
+  width:auto;
+  min-width:0;
+  min-height:82px;
+  padding:8px 5px;
+}
+.attendance .stat span{font-size:14px;white-space:nowrap}
+.attendance .stat strong{font-size:32px}
+.attendance .absent-list{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:46px;
+  padding:8px 100px 8px 13px;
+  font-size:15px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.reset-attendance{
+  right:18px;
+  bottom:13px;
+  max-width:86px;
+}
+
+/* 叮嚀文字避免寬度把右欄撐開 */
+.reminder{
+  grid-template-columns:150px minmax(0,1fr);
+  overflow:hidden;
+}
+.reminder ul{
+  min-width:0;
+  font-size:18px;
+  line-height:1.42;
+}
+.reminder li{white-space:normal}
+
+/* 座位區也禁止內容撐破右欄 */
+.seat-card{overflow:hidden}
+.seats{min-width:0}
+.seat{min-width:0}
+
 </style>
 </head>
 <body>
