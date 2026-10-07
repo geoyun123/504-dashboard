@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>鼓山高中 504｜第一次定期評量</title>
+<title>504｜第一次定期評量</title>
 <style>
 *{box-sizing:border-box}
 :root{
@@ -54,8 +54,6 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seat-head{margin-bottom:5px}
 .seat-head .title{font-size:21px}
 .board{width:42%;margin:0 auto 7px;padding:5px;background:#5d5955;box-shadow:0 3px 0 #cbc2b7;position:relative}
-.board:before{content:"✦";position:absolute;left:-30px;color:#dc774c;font-size:17px}
-.board:after{content:"✎";position:absolute;right:-31px;color:#77716b;font-size:17px}
 .seats{height:calc(100% - 70px);gap:8px}
 .seat{font-size:23px;border-radius:11px;background:#fbf9f5}
 .seat.absent{background:var(--orange-soft)}
@@ -63,7 +61,6 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 /* 左側也補少量一致的可愛點綴 */
 .clock-card{position:relative;overflow:hidden}
 .clock-card:after{content:"✦";position:absolute;right:24px;top:20px;color:#dc774c;font-size:24px;opacity:.8}
-.clock-card:before{content:"✎";position:absolute;left:24px;bottom:20px;color:#aaa197;font-size:22px;transform:rotate(-12deg)}
 .schedule .title:after{content:"  ✦";color:#dc774c;font-size:16px}
 
 @media(max-width:1000px){
@@ -76,10 +73,67 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
  .seat-card{min-height:520px}
 }
 
+
+/* ===== 本次微調 ===== */
+.schedule .title:after{content:""}
+
+/* 出席狀況：與叮嚀同底色，但提高資訊層級 */
+.attendance{
+  background:#faf6ef!important;
+  grid-template-columns:150px 1fr 220px;
+  border-bottom:1px solid var(--line)!important;
+}
+.attendance .title{
+  font-size:23px;
+  font-weight:900;
+  color:#302f2d;
+}
+.attendance .stats{gap:10px}
+.attendance .stat{
+  background:#fffdfa;
+  border:1px solid #e5ddd2;
+  padding:7px 5px;
+}
+.attendance .stat span{
+  font-size:13px;
+  font-weight:700;
+}
+.attendance .stat strong{
+  font-size:27px;
+  font-weight:900;
+}
+.attendance .absent-list{
+  background:#f3ddcf;
+  border:1px solid #ebcbb8;
+  font-size:15px;
+  font-weight:800;
+  padding:10px 12px;
+}
+
+/* 導師叮嚀：三點固定三行，與出席狀況同底色 */
+.reminder{
+  background:#faf6ef!important;
+  grid-template-columns:170px 1fr;
+  padding:8px 105px 8px 18px;
+}
+.reminder ul{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1px;
+  margin:0;
+  padding-left:20px;
+  font-size:14px;
+  line-height:1.35;
+}
+.reminder li{white-space:nowrap}
+
+/* 黑板只保留黑板本體 */
+.board:before,.board:after{content:none!important}
+
 </style>
 </head>
 <body>
-<header><h1>鼓山高中 504｜第一次定期評量</h1><div class="tag">504 Exam Dashboard</div></header>
+<header><h1>504｜第一次定期評量</h1><div class="tag">504 Exam Dashboard</div></header>
 <main class="dashboard">
   <section class="left">
     <div class="card clock-card">
@@ -98,7 +152,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   <section class="right">
     <div class="top-right">
       <div class="card attendance">
-        <h2 class="title">▣ 504 出缺席</h2>
+        <h2 class="title">出席狀況</h2>
         <div class="stats">
           <div class="stat"><span>應到</span><strong>27</strong></div>
           <div class="stat"><span>實到</span><strong id="presentCount">27</strong></div>
