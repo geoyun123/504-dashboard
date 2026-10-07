@@ -497,6 +497,15 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   font-weight:800 !important;
 }
 
+
+/* ===== 考科顏色修正版 ===== */
+.schedule-row .exam-subject,
+.schedule .exam-subject,
+.exam-subject{
+  color:#c8663d !important;
+  font-weight:800 !important;
+}
+
 </style>
 </head>
 <body>
@@ -711,6 +720,28 @@ renderSeats();updateAttendance();updateClock();setInterval(updateClock,1000);
     markExamSubjects();
     const schedule=document.querySelector(".schedule");
     if(schedule) observer.observe(schedule,{childList:true,subtree:true,characterData:true});
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  const examSubjects = new Set(["國寫","歷史","國文","英聽","地理","數學B","公民","英文"]);
+  function applyExamColors(){
+    document.querySelectorAll(".schedule *").forEach(el=>{
+      if(el.children.length===0){
+        const t=(el.textContent||"").trim();
+        if(examSubjects.has(t)) el.classList.add("exam-subject");
+      }
+    });
+  }
+  window.addEventListener("DOMContentLoaded",()=>{
+    applyExamColors();
+    const s=document.querySelector(".schedule");
+    if(s){
+      new MutationObserver(applyExamColors).observe(s,{childList:true,subtree:true,characterData:true});
+    }
   });
 })();
 </script>
