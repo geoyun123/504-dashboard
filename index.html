@@ -215,6 +215,60 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 /* 右側座位表因欄寬增加，座位略放大 */
 .seat{font-size:28px}
 
+
+/* ===== 圈選區域精修 ===== */
+
+/* 1. 出席統計四個資訊框放大 */
+.attendance{
+  grid-template-columns:140px 1fr 255px;
+  gap:17px;
+  padding:13px 20px;
+}
+.attendance .stats{gap:13px}
+.attendance .stat{
+  min-height:112px;
+  padding:13px 8px;
+  border-radius:16px;
+}
+.attendance .stat span{
+  font-size:17px;
+  font-weight:800;
+  margin-bottom:5px;
+}
+.attendance .stat strong{
+  font-size:39px;
+  font-weight:900;
+}
+.attendance .absent-list{
+  min-height:72px;
+  padding:13px 16px;
+  font-size:18px;
+  font-weight:850;
+  border-radius:16px;
+}
+.attendance .absent-list b{font-size:20px}
+
+/* 2. 導師叮嚀內容放大，仍維持一點一行 */
+.reminder{
+  grid-template-columns:170px 1fr;
+  padding:8px 20px;
+}
+.reminder .title{font-size:22px}
+.reminder ul{
+  font-size:17px;
+  line-height:1.35;
+  gap:2px;
+  padding-left:22px;
+}
+
+/* 3. 黑板精準對齊最上排四個座位的總寬度
+   六欄座位中，上排使用中間四欄，因此黑板寬度 = 4/6 座位區寬度 */
+.board{
+  width:66.6667%;
+  padding:8px 6px;
+  margin:0 auto 7px;
+}
+
 </style>
 </head>
 <body>
