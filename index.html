@@ -274,7 +274,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 
 /* 導師叮嚀：三行 21px */
 .reminder ul{
-  font-size:23px;
+  font-size:21px;
   line-height:1.22;
   gap:0;
 }
@@ -300,6 +300,53 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   width:59%;
 }
 
+
+/* ===== 出席狀況自動保存 ===== */
+.attendance{
+  grid-template-columns:140px 1fr 255px auto;
+}
+.reset-attendance{
+  appearance:none;
+  border:1px solid #d8cfc4;
+  background:#fffdfa;
+  color:#6d6761;
+  border-radius:12px;
+  padding:10px 12px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.reset-attendance:hover{
+  background:#f1ece5;
+  color:#302f2d;
+}
+
+
+/* ===== 三日考程自動切換 ===== */
+.schedule-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.schedule-heading .title{margin-bottom:12px}
+.day-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:68px;
+  padding:6px 11px;
+  margin-bottom:12px;
+  border-radius:999px;
+  background:var(--orange-soft);
+  color:#c85e37;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
 </style>
 </head>
 <body>
@@ -314,7 +361,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
       <div class="current" id="current">目前狀態：準備中</div>
     </div>
     <div class="card schedule">
-      <h2 class="title">✎ 今日考程</h2>
+      <div class="schedule-heading"><h2 class="title">✎ 今日考程</h2><span class="day-badge" id="dayBadge">—</span></div>
       <div id="schedule"></div>
     </div>
   </section>
@@ -328,7 +375,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
           <div class="stat"><span>實到</span><strong id="presentCount">27</strong></div>
           <div class="stat"><span>缺席</span><strong id="absentCount">0</strong></div>
         </div>
-        <div class="absent-list">缺席座號：<b id="absentNumbers">—</b></div>
+        <div class="absent-list">缺席座號：<b id="absentNumbers">—</b></div><button class="reset-attendance" onclick="resetAttendance()" title="將出席狀況恢復為全班到班">重設出席</button>
       </div>
       <div class="card reminder">
         <h2 class="title">導師叮嚀</h2>
@@ -353,11 +400,51 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 
 <script>
 const TOTAL_STUDENTS=27;
-const schedule=[
- ["08:10","09:00","國文"],["09:15","10:05","英文"],["10:20","11:10","數學"],
- ["11:10","12:30","午餐、打掃"],["12:30","13:10","午休"],
- ["13:20","14:10","歷史"],["14:25","15:15","地理"]
-];
+const examSchedules={
+ "2026-10-12":{
+   day:"DAY 1",
+   schedule:[
+     ["08:10","09:10","國寫"],
+     ["09:30","10:30","自修"],
+     ["10:50","11:50","歷史"],
+     ["13:30","14:30","自修"],
+     ["14:50","15:50","國文"]
+   ]
+ },
+ "2026-10-13":{
+   day:"DAY 2",
+   schedule:[
+     ["08:10","09:10","自修"],
+     ["09:30","10:30","英聽"],
+     ["10:50","11:50","地理"],
+     ["13:30","14:30","自修"],
+     ["14:50","15:50","數學B"]
+   ]
+ },
+ "2026-10-14":{
+   day:"DAY 3",
+   schedule:[
+     ["08:10","09:10","公民"],
+     ["09:30","10:30","自修"],
+     ["10:50","11:50","自修"],
+     ["13:30","14:30","自修"],
+     ["14:50","15:50","英文"]
+   ]
+ }
+};
+
+function localDateKey(d){
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,"0");
+  const day=String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${day}`;
+}
+function getTodayExam(){
+  const key=localDateKey(new Date());
+  return examSchedules[key] || null;
+}
+let todayExam=getTodayExam();
+let schedule=todayExam ? todayExam.schedule : [];
 const seatLayout=[
  [null,19,22,9,15,null],
  [25,14,7,18,2,23],
@@ -365,11 +452,38 @@ const seatLayout=[
  [21,20,4,17,13,11],
  [null,3,10,24,27,26]
 ];
-const absent=new Set();
+const STORAGE_KEY="504-exam-absent-seats";
+let savedAbsent=[];
+try{
+  savedAbsent=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+  if(!Array.isArray(savedAbsent)) savedAbsent=[];
+}catch(e){savedAbsent=[];}
+const absent=new Set(savedAbsent.map(Number).filter(n=>Number.isInteger(n)&&n>=1&&n<=TOTAL_STUDENTS));
+
+function saveAttendance(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify([...absent].sort((a,b)=>a-b)));
+}
+function resetAttendance(){
+  if(!confirm("確定要將出席狀況重設為全班到班嗎？")) return;
+  absent.clear();
+  saveAttendance();
+  renderSeats();
+  updateAttendance();
+}
 
 function mins(t){const [h,m]=t.split(":").map(Number);return h*60+m}
 function renderSchedule(active=-1){
  const box=document.getElementById("schedule"); box.innerHTML="";
+ const badge=document.getElementById("dayBadge");
+ if(!todayExam){
+   badge.textContent="非考試日";
+   const d=document.createElement("div");
+   d.className="schedule-row";
+   d.innerHTML='<span class="time">—</span><span>今日無定期評量考程</span>';
+   box.appendChild(d);
+   return;
+ }
+ badge.textContent=todayExam.day;
  schedule.forEach((r,i)=>{
    const d=document.createElement("div");d.className="schedule-row"+(i===active?" active":"");
    d.innerHTML=`<span class="time">${r[0]} – ${r[1]}</span><span>${r[2]}</span>`;box.appendChild(d);
@@ -383,7 +497,7 @@ function renderSeats(){
    else{
      d.className="seat"+(absent.has(n)?" absent":"");
      d.textContent=n;
-     d.onclick=()=>{absent.has(n)?absent.delete(n):absent.add(n);renderSeats();updateAttendance();}
+     d.onclick=()=>{absent.has(n)?absent.delete(n):absent.add(n);saveAttendance();renderSeats();updateAttendance();}
    }
    box.appendChild(d);
  });
@@ -399,10 +513,18 @@ function updateClock(){
  const days=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
  document.getElementById("date").textContent=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日 ${days[now.getDay()]}`;
  document.getElementById("clock").textContent=[h,m,s].map(v=>String(v).padStart(2,"0")).join(":");
+ todayExam=getTodayExam();
+ schedule=todayExam ? todayExam.schedule : [];
  let active=-1,next=-1;
  schedule.forEach((r,i)=>{if(cur>=mins(r[0])&&cur<mins(r[1]))active=i;if(next<0&&cur<mins(r[0]))next=i;});
  renderSchedule(active);
  let label,current,target;
+ if(!todayExam){
+   document.getElementById("countLabel").textContent="今日非定期評量日";
+   document.getElementById("current").textContent="";
+   document.getElementById("countdown").textContent="—";
+   return;
+ }
  if(active>=0){label=`【${schedule[active][2]}】結束倒數`;current=`目前狀態：${schedule[active][2]}`;target=mins(schedule[active][1])*60;}
  else if(next>=0){label=`【${schedule[next][2]}】開始倒數`;current=`目前狀態：等待 ${schedule[next][2]}`;target=mins(schedule[next][0])*60;}
  else{label="今日考程已結束";current="目前狀態：考程結束";target=null;}
