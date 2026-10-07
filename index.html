@@ -15,7 +15,7 @@ body{overflow:hidden}
 header{height:56px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-weight:800}
 header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22px;padding:7px 16px;font-size:14px;font-weight:500}
 .dashboard{height:calc(100vh - 56px);padding:14px 16px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.left,.right{min-width:0;display:grid;gap:14px}.left{grid-template-rows:270px 1fr}.right{grid-template-rows:15% 15% 70%;gap:10px}
+.left{min-width:0;display:grid;gap:14px;grid-template-rows:270px 1fr}.right{min-width:0;display:grid;grid-template-rows:15% 15% 70%;gap:0;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .clock-card{padding:18px 22px;text-align:center}.date{font-size:22px;font-weight:700;color:#69645f}.clock{font-size:64px;font-weight:850;letter-spacing:2px;line-height:1.1;margin:8px 0}
 .count-label{font-size:19px;font-weight:700;color:#625d58}.countdown{font-size:34px;font-weight:850;color:var(--orange);margin-top:4px}.current{margin-top:10px;padding:10px;border-radius:13px;background:#eee9e1;font-size:17px;font-weight:750}
@@ -31,24 +31,50 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seat:hover{transform:translateY(-1px);border-color:#bdb4a8}.seat.absent{background:var(--orange-soft);border:2px solid var(--orange);color:#b84f2c}.seat.empty{visibility:hidden;pointer-events:none}
 @media(max-width:1000px){body{overflow:auto}.dashboard{height:auto;grid-template-columns:1fr}.left,.right{grid-template-rows:auto}.clock-card{min-height:250px}.schedule{min-height:390px}.top-right{grid-template-columns:1fr}.seat-card{min-height:500px}}
 
-/* 右側三列：出缺席 15%／導師叮嚀 15%／座位表 70% */
-.right > .top-right { display: contents; }
-.attendance, .reminder { min-height: 0; overflow: hidden; }
-.attendance { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:10px 16px; }
-.attendance .title { margin:0; white-space:nowrap; font-size:20px; }
-.attendance .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
-.attendance .stat { padding:6px 4px; }
-.attendance .stat span { font-size:12px; }
-.attendance .stat strong { font-size:22px; line-height:1.05; }
-.attendance .absent-list { margin:0; white-space:nowrap; font-size:14px; }
+/* ===== 右側整合資訊板 ===== */
+.right .card{border:0;border-radius:0;box-shadow:none;background:transparent}
+.attendance{grid-row:1;padding:10px 18px;display:grid;grid-template-columns:170px 1fr 210px;align-items:center;gap:14px;border-bottom:1px solid var(--line)!important;background:#fffdfa!important}
+.attendance .title{margin:0;font-size:20px;white-space:nowrap}
+.attendance .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.attendance .stat{padding:6px 5px;border-radius:12px;background:#f1ece5}
+.attendance .stat span{font-size:12px}
+.attendance .stat strong{font-size:22px;line-height:1.05}
+.attendance .absent-list{margin:0;font-size:14px;white-space:nowrap;background:var(--orange-soft);padding:8px 11px;border-radius:12px}
 
-.reminder { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:18px; padding:10px 18px; }
-.reminder .title { margin:0; white-space:nowrap; font-size:20px; }
-.reminder ul { margin:0; display:flex; flex-wrap:wrap; gap:4px 24px; padding-left:20px; font-size:14px; line-height:1.4; }
-.reminder li { margin:0; }
+.reminder{grid-row:2;position:relative;padding:9px 105px 9px 18px;display:grid;grid-template-columns:170px 1fr;align-items:center;gap:12px;border-bottom:1px solid var(--line)!important;background:#faf6ef!important;overflow:hidden}
+.reminder .title{margin:0;font-size:20px;white-space:nowrap}
+.reminder ul{margin:0;padding-left:20px;display:flex;flex-wrap:wrap;gap:2px 22px;font-size:14px;line-height:1.35}
+.reminder li{margin:0}
 
-.seat-card { min-height:0; }
-.seats { height:calc(100% - 78px); }
+/* 小熊探頭：純 CSS，不增加圖片檔案大小 */
+.reminder:after{content:"";position:absolute;right:26px;bottom:-11px;width:58px;height:58px;background:#d9b58d;border-radius:48% 48% 44% 44%;box-shadow:-22px -15px 0 -13px #d9b58d,22px -15px 0 -13px #d9b58d}
+.reminder:before{content:"• ᴥ •";position:absolute;z-index:2;right:32px;bottom:11px;width:46px;text-align:center;color:#51483f;font-size:15px;font-weight:900;letter-spacing:1px}
+
+.seat-card{grid-row:3;padding:12px 18px 14px;min-height:0;background:#fffdfa!important}
+.seat-head{margin-bottom:5px}
+.seat-head .title{font-size:21px}
+.board{width:42%;margin:0 auto 7px;padding:5px;background:#5d5955;box-shadow:0 3px 0 #cbc2b7;position:relative}
+.board:before{content:"✦";position:absolute;left:-30px;color:#dc774c;font-size:17px}
+.board:after{content:"✎";position:absolute;right:-31px;color:#77716b;font-size:17px}
+.seats{height:calc(100% - 70px);gap:8px}
+.seat{font-size:23px;border-radius:11px;background:#fbf9f5}
+.seat.absent{background:var(--orange-soft)}
+
+/* 左側也補少量一致的可愛點綴 */
+.clock-card{position:relative;overflow:hidden}
+.clock-card:after{content:"✦";position:absolute;right:24px;top:20px;color:#dc774c;font-size:24px;opacity:.8}
+.clock-card:before{content:"✎";position:absolute;left:24px;bottom:20px;color:#aaa197;font-size:22px;transform:rotate(-12deg)}
+.schedule .title:after{content:"  ✦";color:#dc774c;font-size:16px}
+
+@media(max-width:1000px){
+ .right{display:block;background:transparent;border:0;box-shadow:none;overflow:visible}
+ .right .card{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:14px}
+ .attendance,.reminder{display:block;padding:16px}
+ .attendance .stats{margin-top:10px}
+ .attendance .absent-list{margin-top:10px}
+ .reminder ul{display:block;margin-top:8px}
+ .seat-card{min-height:520px}
+}
 
 </style>
 </head>
