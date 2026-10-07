@@ -161,6 +161,60 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seats{height:calc(100% - 73px);gap:6px}
 .seat{font-size:27px;font-weight:900}
 
+
+/* ===== 大螢幕重新平衡版 ===== */
+
+/* 左右改為 48 / 52，右側資訊較多，取得稍多空間 */
+.dashboard{grid-template-columns:48% 52%;gap:14px}
+
+/* 左上：移除目前狀態，讓時間成為真正主角 */
+.clock-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 22px}
+.clock{font-size:78px;line-height:1;margin:10px 0 8px}
+.date{font-size:22px}
+.count-label{font-size:20px}
+.countdown{font-size:38px;margin-top:5px}
+.current{display:none}
+
+/* 左側上下比例稍微平衡 */
+.left{grid-template-rows:290px 1fr}
+
+/* 右側仍為 25 / 15 / 60 */
+.right{grid-template-rows:25% 15% 60%}
+
+/* 出席狀況：三個統計框明顯放大 */
+.attendance{
+  grid-template-columns:145px 1fr 225px;
+  gap:16px;
+  padding:15px 20px;
+}
+.attendance .title{font-size:25px}
+.attendance .stats{gap:12px}
+.attendance .stat{
+  min-height:94px;
+  padding:11px 7px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-radius:15px;
+}
+.attendance .stat span{font-size:15px;margin-bottom:3px}
+.attendance .stat strong{font-size:34px;line-height:1}
+.attendance .absent-list{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  font-size:16px;
+  border-radius:14px;
+}
+
+/* 考程維持大字，但稍微增加左右呼吸空間 */
+.schedule{padding:16px 22px}
+.schedule-row{grid-template-columns:185px 1fr;font-size:23px;min-height:55px}
+.schedule-row .time{font-size:18px}
+
+/* 右側座位表因欄寬增加，座位略放大 */
+.seat{font-size:28px}
+
 </style>
 </head>
 <body>
