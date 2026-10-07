@@ -470,7 +470,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 </style>
 </head>
 <body>
-<header><h1>504｜第一次定期評量</h1><div class="tag">504 Exam Dashboard</div></header>
+<header><h1>鼓山高中504｜第一次段考</h1><div class="tag">504 Exam Dashboard</div></header>
 <main class="dashboard">
   <section class="left">
     <div class="card clock-card">
@@ -500,9 +500,9 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
       <div class="card reminder">
         <h2 class="title">導師叮嚀</h2>
         <ul>
-          <li>鐘響前：請收妥課本、個人物品、座位清空</li>
-          <li>交卷前：檢查班級座號姓名填寫皆已完成，答案卡畫記無誤</li>
-          <li>交卷後：</li>
+          <li>鐘響前：收妥課本、個人物品並淨空座位</li>
+          <li>交卷前：檢查班級、姓名與座號與答案卡</li>
+          <li>鐘響後：立即停筆，等待監考老師點卷完成</li>
         </ul>
       </div>
     </div>
@@ -510,7 +510,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
     <div class="card seat-card">
       <div class="seat-head">
         <h2 class="title">504 座位表｜學生視角</h2>
-        <div class="legend">點一下：缺席｜再點一下：恢復</div>
+        <div class="legend">點一下：缺席｜再點一下：恢復到班</div>
       </div>
       <div class="board">黑 板</div>
       <div class="seats" id="seats"></div>
@@ -557,6 +557,14 @@ const examSchedules={
 };
 
 function localDateKey(d){
+  const previewDay = new URLSearchParams(window.location.search).get("day");
+  const previewDates = {
+    "1":"2026-10-12",
+    "2":"2026-10-13",
+    "3":"2026-10-14"
+  };
+  if(previewDates[previewDay]) return previewDates[previewDay];
+
   const y=d.getFullYear();
   const m=String(d.getMonth()+1).padStart(2,"0");
   const day=String(d.getDate()).padStart(2,"0");
