@@ -130,6 +130,37 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 /* 黑板只保留黑板本體 */
 .board:before,.board:after{content:none!important}
 
+
+/* ===== 25 / 15 / 60 大螢幕微調 ===== */
+.right{grid-template-rows:25% 15% 60%}
+
+/* 考程文字放大 */
+.schedule .title{font-size:25px;margin-bottom:13px}
+.schedule-row{grid-template-columns:175px 1fr;min-height:54px;font-size:23px;padding:0 14px}
+.schedule-row .time{font-size:18px;font-weight:800}
+
+/* 出席狀況 25% */
+.attendance{grid-template-columns:150px 1fr 230px;padding:14px 18px}
+.attendance .title{font-size:25px}
+.attendance .stat{padding:10px 6px}
+.attendance .stat span{font-size:14px}
+.attendance .stat strong{font-size:31px}
+.attendance .absent-list{font-size:16px;padding:12px 13px}
+
+/* 導師叮嚀 15%：刪除小熊 */
+.reminder{padding:8px 18px;grid-template-columns:170px 1fr}
+.reminder:before,.reminder:after{content:none!important;display:none!important}
+.reminder .title{font-size:21px}
+.reminder ul{font-size:14px;line-height:1.28}
+
+/* 座位表 60% */
+.seat-card{padding:9px 18px 12px}
+.seat-head{margin-bottom:3px}
+.seat-head .title{font-size:21px}
+.board{width:82%;padding:8px 6px;margin:0 auto 7px;font-size:15px;letter-spacing:12px}
+.seats{height:calc(100% - 73px);gap:6px}
+.seat{font-size:27px;font-weight:900}
+
 </style>
 </head>
 <body>
@@ -161,7 +192,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
         <div class="absent-list">缺席座號：<b id="absentNumbers">—</b></div>
       </div>
       <div class="card reminder">
-        <h2 class="title">導師小叮嚀</h2>
+        <h2 class="title">導師叮嚀</h2>
         <ul>
           <li>鐘響前請收妥課本與個人物品</li>
           <li>記得寫上班級、姓名與座號</li>
