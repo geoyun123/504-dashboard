@@ -467,6 +467,36 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seats{min-width:0}
 .seat{min-width:0}
 
+
+/* ===== 最終視覺微調：右側標題一致＋考科重點色 ===== */
+
+/* 三個右側區塊標題統一 */
+.attendance .title,
+.reminder .title,
+.seat-card .title,
+.seat-title,
+.seat-card h2,
+.seat-card h3{
+  font-size:25px !important;
+  font-weight:700 !important;
+  line-height:1.25 !important;
+  letter-spacing:0 !important;
+}
+
+/* 座位表標題與黑板／座位之間增加垂直間距 */
+.seat-card .title,
+.seat-title,
+.seat-card h2,
+.seat-card h3{
+  margin-bottom:18px !important;
+}
+
+/* 正式考科：暖橘色、稍加粗；非考科維持原本灰黑 */
+.schedule .exam-subject{
+  color:#b65f35 !important;
+  font-weight:800 !important;
+}
+
 </style>
 </head>
 <body>
@@ -500,9 +530,9 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
       <div class="card reminder">
         <h2 class="title">導師叮嚀</h2>
         <ul>
-          <li>鐘響前：收妥課本、個人物品並淨空座位</li>
-          <li>交卷前：檢查班級、姓名與座號與答案卡</li>
-          <li>鐘響後：立即停筆，等待監考老師點卷完成</li>
+          <li>鐘響前請收妥課本與個人物品</li>
+          <li>記得寫上班級、姓名與座號</li>
+          <li>考試結束請立即停筆</li>
         </ul>
       </div>
     </div>
@@ -665,5 +695,25 @@ function updateClock(){
 }
 renderSeats();updateAttendance();updateClock();setInterval(updateClock,1000);
 </script>
+
+<script>
+/* 考程正式考科重點色：自修、午餐打掃等生活時段不套色 */
+(function(){
+  const nonExam = new Set(["自修","午餐、打掃","午餐打掃","午餐","打掃"]);
+  function markExamSubjects(){
+    document.querySelectorAll(".schedule .subject").forEach(el=>{
+      const text=(el.textContent||"").trim();
+      el.classList.toggle("exam-subject", text && !nonExam.has(text));
+    });
+  }
+  const observer=new MutationObserver(markExamSubjects);
+  window.addEventListener("DOMContentLoaded",()=>{
+    markExamSubjects();
+    const schedule=document.querySelector(".schedule");
+    if(schedule) observer.observe(schedule,{childList:true,subtree:true,characterData:true});
+  });
+})();
+</script>
+
 </body>
 </html>
