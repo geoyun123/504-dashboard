@@ -580,6 +580,62 @@ footer {
     line-height: 1.45;
   }
 }
+  /* ===== 左側資訊放大 ===== */
+
+.left {
+  font-size: 17px;
+}
+
+/* 日期 */
+.date {
+  font-size: 21px !important;
+}
+
+/* 大時鐘 */
+.clock {
+  font-size: 56px !important;
+}
+
+/* 倒數文字 */
+.countdown-label {
+  font-size: 18px !important;
+}
+
+.countdown {
+  font-size: 34px !important;
+}
+
+/* 目前狀態 */
+.status {
+  font-size: 17px !important;
+}
+
+/* 出缺席標題 */
+.attendance-card h2,
+.attendance-card h3 {
+  font-size: 22px !important;
+}
+
+/* 出缺席小標 */
+.attendance-item,
+.attendance-box {
+  font-size: 16px;
+}
+
+/* 導師小叮嚀 */
+.reminder {
+  font-size: 17px !important;
+}
+
+.reminder h2,
+.reminder h3 {
+  font-size: 21px !important;
+}
+
+.reminder li {
+  font-size: 17px !important;
+  line-height: 1.55 !important;
+}
 </style>
 </head>
 
@@ -630,10 +686,6 @@ footer {
           <strong id="absentCount">0</strong>
         </div>
 
-        <div class="stat">
-          <span>抽離</span>
-          <strong id="awayCount">0</strong>
-        </div>
       </div>
     </div>
 
@@ -926,7 +978,7 @@ function buildSeats() {
     seat.id = "seat-" + i;
 
     seat.innerHTML = `
-      <div class="num">${String(i).padStart(2,"0")}號</div>
+     <div class="num">${i}</div>
       <div class="seat-status">到班</div>
     `;
 
@@ -939,12 +991,12 @@ function buildSeats() {
 }
 
 
-/* 0＝到班、1＝缺席、2＝抽離 */
+/* 0=到班、1=缺席 */
 
 function changeSeat(number) {
 
-  seatStates[number] =
-    (seatStates[number] + 1) % 3;
+ seatStates[number] =
+  (seatStates[number] + 1) % 2;
 
   const seat =
     document.getElementById("seat-" + number);
@@ -952,7 +1004,7 @@ function changeSeat(number) {
   const text =
     seat.querySelector(".seat-status");
 
-  seat.classList.remove("absent", "away");
+  seat.classList.remove("absent");
 
   if (seatStates[number] === 0) {
 
@@ -967,12 +1019,7 @@ function changeSeat(number) {
 
   }
 
-  if (seatStates[number] === 2) {
-
-    seat.classList.add("away");
-    text.textContent = "抽離";
-
-  }
+  
 
   updateAttendance();
 }
@@ -985,19 +1032,17 @@ function changeSeat(number) {
 function updateAttendance() {
 
   let absent = 0;
-  let away = 0;
 
   Object.values(seatStates).forEach(state => {
 
     if (state === 1) absent++;
 
-    if (state === 2) away++;
 
   });
 
-  const present =
-    TOTAL_STUDENTS - absent - away;
-
+ const present =
+  TOTAL_STUDENTS - absent;
+  
   document.getElementById("totalCount")
     .textContent = TOTAL_STUDENTS;
 
@@ -1007,8 +1052,6 @@ function updateAttendance() {
   document.getElementById("absentCount")
     .textContent = absent;
 
-  document.getElementById("awayCount")
-    .textContent = away;
 }
 
 
