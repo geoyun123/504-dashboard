@@ -15,13 +15,13 @@ body{overflow:hidden}
 header{height:56px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-weight:800}
 header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22px;padding:7px 16px;font-size:14px;font-weight:500}
 .dashboard{height:calc(100vh - 56px);padding:14px 16px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.left,.right{min-width:0;display:grid;gap:14px}.left{grid-template-rows:270px 1fr}.right{grid-template-rows:190px 1fr}
+.left,.right{min-width:0;display:grid;gap:14px}.left{grid-template-rows:270px 1fr}.right{grid-template-rows:15% 15% 70%;gap:10px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .clock-card{padding:18px 22px;text-align:center}.date{font-size:22px;font-weight:700;color:#69645f}.clock{font-size:64px;font-weight:850;letter-spacing:2px;line-height:1.1;margin:8px 0}
 .count-label{font-size:19px;font-weight:700;color:#625d58}.countdown{font-size:34px;font-weight:850;color:var(--orange);margin-top:4px}.current{margin-top:10px;padding:10px;border-radius:13px;background:#eee9e1;font-size:17px;font-weight:750}
 .schedule{padding:16px 20px;overflow:hidden}.title{font-size:23px;font-weight:850;margin:0 0 12px}.schedule-row{display:grid;grid-template-columns:160px 1fr;align-items:center;min-height:48px;padding:0 12px;border-bottom:1px solid var(--line);font-size:19px;font-weight:700}
 .schedule-row:last-child{border-bottom:0}.schedule-row.active{background:var(--orange-soft);border-left:5px solid var(--orange);border-radius:11px;color:#c95d34}.time{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px}
-.top-right{display:grid;grid-template-columns:1fr 1.25fr;gap:14px}.attendance,.reminder{padding:17px 18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#eee9e1;border-radius:14px;text-align:center;padding:10px 5px}.stat span{display:block;color:#716c66;font-size:14px}.stat strong{display:block;font-size:28px;margin-top:2px}
+.top-right{display:contents}.attendance,.reminder{padding:17px 18px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#eee9e1;border-radius:14px;text-align:center;padding:10px 5px}.stat span{display:block;color:#716c66;font-size:14px}.stat strong{display:block;font-size:28px;margin-top:2px}
 .absent-list{margin-top:10px;font-size:15px;font-weight:750}.absent-list b{color:var(--orange)}
 .reminder ul{margin:8px 0 0;padding-left:23px;font-size:16px;line-height:1.55}
 .seat-card{padding:15px 18px;overflow:hidden}.seat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.seat-head .title{margin:0}.legend{font-size:13px;color:var(--muted)}
@@ -30,6 +30,26 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seat{border:1px solid #d9d2c8;border-radius:10px;background:#fbf9f5;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;font-size:20px;font-weight:850;transition:.15s}
 .seat:hover{transform:translateY(-1px);border-color:#bdb4a8}.seat.absent{background:var(--orange-soft);border:2px solid var(--orange);color:#b84f2c}.seat.empty{visibility:hidden;pointer-events:none}
 @media(max-width:1000px){body{overflow:auto}.dashboard{height:auto;grid-template-columns:1fr}.left,.right{grid-template-rows:auto}.clock-card{min-height:250px}.schedule{min-height:390px}.top-right{grid-template-columns:1fr}.seat-card{min-height:500px}}
+
+/* 右側三列：出缺席 15%／導師叮嚀 15%／座位表 70% */
+.right > .top-right { display: contents; }
+.attendance, .reminder { min-height: 0; overflow: hidden; }
+.attendance { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:10px 16px; }
+.attendance .title { margin:0; white-space:nowrap; font-size:20px; }
+.attendance .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+.attendance .stat { padding:6px 4px; }
+.attendance .stat span { font-size:12px; }
+.attendance .stat strong { font-size:22px; line-height:1.05; }
+.attendance .absent-list { margin:0; white-space:nowrap; font-size:14px; }
+
+.reminder { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:18px; padding:10px 18px; }
+.reminder .title { margin:0; white-space:nowrap; font-size:20px; }
+.reminder ul { margin:0; display:flex; flex-wrap:wrap; gap:4px 24px; padding-left:20px; font-size:14px; line-height:1.4; }
+.reminder li { margin:0; }
+
+.seat-card { min-height:0; }
+.seats { height:calc(100% - 78px); }
+
 </style>
 </head>
 <body>
