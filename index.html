@@ -316,6 +316,270 @@ footer {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+  /* ===== 504 米白灰黑版・單頁顯示 ===== */
+
+body {
+  background: #f3f0e9;
+  color: #363432;
+}
+
+header {
+  height: 54px;
+  padding: 0 28px;
+  background: #3f3d3a;
+  color: #faf8f3;
+}
+
+header h1 {
+  font-size: 21px;
+  font-weight: 650;
+}
+
+.header-tag {
+  background: transparent;
+  border-color: #77736d;
+  color: #eeeae3;
+}
+
+.dashboard {
+  max-width: none;
+  height: calc(100vh - 54px);
+  padding: 16px 20px 10px;
+  grid-template-columns: 390px 1fr;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.left {
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid #ded9d1;
+  border-radius: 15px;
+  box-shadow: 0 3px 12px rgba(40, 38, 35, .05);
+  padding: 17px;
+  background: #faf9f6;
+}
+
+.date {
+  font-size: 17px;
+  color: #67635f;
+}
+
+.clock {
+  font-size: 55px;
+  margin: 4px 0;
+  color: #292826;
+}
+
+.countdown-title {
+  font-size: 15px;
+  color: #706b65;
+}
+
+.countdown {
+  font-size: 29px;
+  margin-top: 2px;
+  color: #d9784c;
+}
+
+.status {
+  margin-top: 8px;
+  padding: 8px;
+  background: #eeeae3;
+  color: #45413d;
+  font-size: 14px;
+}
+
+.attendance-title,
+.reminder-title,
+.seat-title {
+  color: #343230;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.stats {
+  gap: 6px;
+}
+
+.stat {
+  padding: 8px 2px;
+  background: #efebe5;
+}
+
+.stat span {
+  font-size: 12px;
+  color: #716c66;
+}
+
+.stat strong {
+  font-size: 21px;
+}
+
+.reminder {
+  background: #eeeae2;
+}
+
+.reminder ul {
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.schedule-card {
+  min-height: 0;
+  padding-bottom: 12px;
+}
+
+.schedule-heading {
+  margin-bottom: 5px;
+}
+
+.schedule-heading h2 {
+  font-size: 20px;
+  color: #343230;
+}
+
+.day-label {
+  color: #a95636;
+  background: #eee9e1;
+  padding: 5px 10px;
+}
+
+.schedule-row {
+  grid-template-columns: 155px 1fr 1fr;
+  min-height: 45px;
+  padding: 5px 13px;
+  border-bottom-color: #e4dfd8;
+}
+
+.schedule-row .time {
+  font-size: 14px;
+  color: #484541;
+}
+
+.schedule-row .subject {
+  font-size: 18px;
+  color: #44413e;
+}
+
+.schedule-row .note {
+  font-size: 13px;
+}
+
+.schedule-row.active {
+  background: #f4e2d6;
+  border-left-color: #d9784c;
+}
+
+.schedule-row.active .subject {
+  color: #b95731;
+}
+
+.seat-card {
+  margin-top: 12px;
+  padding: 14px 17px;
+}
+
+.seat-title {
+  margin-bottom: 5px;
+}
+
+.board {
+  width: 32%;
+  min-width: 180px;
+  margin: 2px auto 10px;
+  padding: 5px;
+  background: #55524e;
+  font-size: 11px;
+}
+
+.seats {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px 8px;
+}
+
+.seat {
+  padding: 5px 2px;
+  min-height: 39px;
+  border-radius: 7px;
+  background: #f7f5f1;
+  border-color: #dcd7cf;
+}
+
+.seat:hover {
+  transform: none;
+}
+
+.seat .num {
+  font-size: 13px;
+}
+
+.seat .seat-status {
+  margin-top: 1px;
+  font-size: 9px;
+}
+
+.seat.absent {
+  background: #ead6d1;
+  border-color: #c98c7d;
+}
+
+.seat.away {
+  background: #dedede;
+  border-color: #999;
+}
+
+.seat-help {
+  margin-top: 7px;
+  font-size: 10px;
+  color: #77726c;
+}
+
+footer {
+  display: none;
+}
+
+/* 一般教室電腦高度較矮時再壓縮 */
+@media (max-height: 800px) and (min-width: 901px) {
+
+  .dashboard {
+    padding-top: 10px;
+    gap: 10px;
+  }
+
+  .left {
+    gap: 8px;
+  }
+
+  .card {
+    padding: 12px 15px;
+  }
+
+  .clock {
+    font-size: 47px;
+  }
+
+  .schedule-row {
+    min-height: 39px;
+  }
+
+  .seat-card {
+    margin-top: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .seat {
+    min-height: 32px;
+    padding: 3px 2px;
+  }
+
+  .reminder ul {
+    line-height: 1.45;
+  }
+}
 </style>
 </head>
 
@@ -644,7 +908,7 @@ function updateClock() {
    建立座位表
 ================================ */
 
-const TOTAL_STUDENTS = 30;
+const TOTAL_STUDENTS = 27;
 
 const seatStates = {};
 
