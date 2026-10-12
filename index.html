@@ -32,7 +32,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seat:hover{transform:translateY(-1px);border-color:#bdb4a8}.seat.absent{background:var(--orange-soft);border:2px solid var(--orange);color:#b84f2c}.seat.empty{visibility:hidden;pointer-events:none}
 @media(max-width:1000px){body{overflow:auto}.dashboard{height:auto;grid-template-columns:1fr}.left,.right{grid-template-rows:auto}.clock-card{min-height:250px}.schedule{min-height:390px}.top-right{grid-template-columns:1fr}.seat-card{min-height:500px}}
 
-/* ===== 右側整合資訊板 ===== */
+
 .right .card{border:0;border-radius:0;box-shadow:none;background:transparent}
 .attendance{grid-row:1;padding:10px 18px;display:grid;grid-template-columns:170px 1fr 210px;align-items:center;gap:14px;border-bottom:1px solid var(--line)!important;background:#fffdfa!important}
 .attendance .title{margin:0;font-size:20px;white-space:nowrap}
@@ -47,7 +47,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .reminder ul{margin:0;padding-left:20px;display:flex;flex-wrap:wrap;gap:2px 22px;font-size:14px;line-height:1.35}
 .reminder li{margin:0}
 
-/* 小熊探頭：純 CSS，不增加圖片檔案大小 */
+
 .reminder:after{content:"";position:absolute;right:26px;bottom:-11px;width:58px;height:58px;background:#d9b58d;border-radius:48% 48% 44% 44%;box-shadow:-22px -15px 0 -13px #d9b58d,22px -15px 0 -13px #d9b58d}
 .reminder:before{content:"• ᴥ •";position:absolute;z-index:2;right:32px;bottom:11px;width:46px;text-align:center;color:#51483f;font-size:15px;font-weight:900;letter-spacing:1px}
 
@@ -59,7 +59,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seat{font-size:23px;border-radius:11px;background:#fbf9f5}
 .seat.absent{background:var(--orange-soft)}
 
-/* 左側也補少量一致的可愛點綴 */
+
 .clock-card{position:relative;overflow:hidden}
 .clock-card:after{content:"✦";position:absolute;right:24px;top:20px;color:#dc774c;font-size:24px;opacity:.8}
 .schedule .title:after{content:"  ✦";color:#dc774c;font-size:16px}
@@ -75,10 +75,9 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 
 
-/* ===== 本次微調 ===== */
 .schedule .title:after{content:""}
 
-/* 出席狀況：與叮嚀同底色，但提高資訊層級 */
+
 .attendance{
   background:#faf6ef!important;
   grid-template-columns:150px 1fr 220px;
@@ -111,7 +110,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   padding:10px 12px;
 }
 
-/* 導師叮嚀：三點固定三行，與出席狀況同底色 */
+
 .reminder{
   background:#faf6ef!important;
   grid-template-columns:170px 1fr;
@@ -128,19 +127,18 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 .reminder li{white-space:nowrap}
 
-/* 黑板只保留黑板本體 */
+
 .board:before,.board:after{content:none!important}
 
 
-/* ===== 25 / 15 / 60 大螢幕微調 ===== */
 .right{grid-template-rows:25% 15% 60%}
 
-/* 考程文字放大 */
+
 .schedule .title{font-size:25px;margin-bottom:13px}
 .schedule-row{grid-template-columns:175px 1fr;min-height:54px;font-size:23px;padding:0 14px}
 .schedule-row .time{font-size:18px;font-weight:800}
 
-/* 出席狀況 25% */
+
 .attendance{grid-template-columns:150px 1fr 230px;padding:14px 18px}
 .attendance .title{font-size:25px}
 .attendance .stat{padding:10px 6px}
@@ -148,13 +146,13 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .attendance .stat strong{font-size:31px}
 .attendance .absent-list{font-size:16px;padding:12px 13px}
 
-/* 導師叮嚀 15%：刪除小熊 */
+
 .reminder{padding:8px 18px;grid-template-columns:170px 1fr}
 .reminder:before,.reminder:after{content:none!important;display:none!important}
 .reminder .title{font-size:21px}
 .reminder ul{font-size:14px;line-height:1.28}
 
-/* 座位表 60% */
+
 .seat-card{padding:9px 18px 12px}
 .seat-head{margin-bottom:3px}
 .seat-head .title{font-size:21px}
@@ -163,12 +161,9 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .seat{font-size:27px;font-weight:900}
 
 
-/* ===== 大螢幕重新平衡版 ===== */
-
-/* 左右改為 48 / 52，右側資訊較多，取得稍多空間 */
 .dashboard{grid-template-columns:48% 52%;gap:14px}
 
-/* 左上：移除目前狀態，讓時間成為真正主角 */
+
 .clock-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 22px}
 .clock{font-size:78px;line-height:1;margin:10px 0 8px}
 .date{font-size:22px}
@@ -176,13 +171,13 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .countdown{font-size:38px;margin-top:5px}
 .current{display:none}
 
-/* 左側上下比例稍微平衡 */
+
 .left{grid-template-rows:290px 1fr}
 
-/* 右側仍為 25 / 15 / 60 */
+
 .right{grid-template-rows:25% 15% 60%}
 
-/* 出席狀況：三個統計框明顯放大 */
+
 .attendance{
   grid-template-columns:145px 1fr 225px;
   gap:16px;
@@ -208,18 +203,15 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   border-radius:14px;
 }
 
-/* 考程維持大字，但稍微增加左右呼吸空間 */
+
 .schedule{padding:16px 22px}
 .schedule-row{grid-template-columns:185px 1fr;font-size:23px;min-height:55px}
 .schedule-row .time{font-size:18px}
 
-/* 右側座位表因欄寬增加，座位略放大 */
+
 .seat{font-size:28px}
 
 
-/* ===== 圈選區域精修 ===== */
-
-/* 1. 出席統計四個資訊框放大 */
 .attendance{
   grid-template-columns:140px 1fr 255px;
   gap:17px;
@@ -249,7 +241,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 .attendance .absent-list b{font-size:20px}
 
-/* 2. 導師叮嚀內容放大，仍維持一點一行 */
+
 .reminder{
   grid-template-columns:170px 1fr;
   padding:8px 20px;
@@ -262,8 +254,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   padding-left:22px;
 }
 
-/* 3. 黑板精準對齊最上排四個座位的總寬度
-   六欄座位中，上排使用中間四欄，因此黑板寬度 = 4/6 座位區寬度 */
+
 .board{
   width:66.6667%;
   padding:8px 6px;
@@ -271,16 +262,13 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 
 
-/* ===== 導師叮嚀與座位間距微調 ===== */
-
-/* 導師叮嚀：三行 21px */
 .reminder ul{
   font-size:21px;
   line-height:1.22;
   gap:0;
 }
 
-/* 座位格縮小，字體維持 28px；增加格子之間的留白 */
+
 .seats{
   height:calc(100% - 73px);
   gap:12px 14px;
@@ -296,13 +284,12 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   align-self:center;
 }
 
-/* 黑板仍對齊第一排四個座位縮小後的視覺寬度 */
+
 .board{
   width:59%;
 }
 
 
-/* ===== 出席狀況自動保存 ===== */
 .attendance{
   grid-template-columns:140px 1fr 255px auto;
 }
@@ -325,7 +312,6 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 
 
-/* ===== 三日考程自動切換 ===== */
 .schedule-heading{
   display:flex;
   align-items:center;
@@ -349,9 +335,6 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 
 
-/* ===== 右上資訊區舒展版 ===== */
-
-/* 出席區：避免四個資訊框互相擠壓 */
 .attendance{
   grid-template-columns:150px 1fr;
   grid-template-rows:auto auto;
@@ -390,7 +373,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 .attendance{position:relative}
 .attendance .absent-list{padding-right:105px}
 
-/* 導師叮嚀：稍微縮字並增加行距，不再擠成一團 */
+
 .reminder{
   grid-template-columns:170px 1fr;
   padding:10px 20px;
@@ -402,15 +385,12 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 
 
-/* ===== 右側溢出修正版 ===== */
-
-/* 關鍵：Grid 子項允許真正縮小，不再把右欄撐出 viewport */
 .dashboard,.right,.top-right,.attendance,.reminder,.seat-card{min-width:0}
 .attendance>*,
 .reminder>*,
 .seat-card>*{min-width:0}
 
-/* 出席區重新用固定可控欄寬，全部收在右欄內 */
+
 .attendance{
   grid-template-columns:140px minmax(0,1fr);
   grid-template-rows:auto auto;
@@ -450,7 +430,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   max-width:86px;
 }
 
-/* 叮嚀文字避免寬度把右欄撐開 */
+
 .reminder{
   grid-template-columns:150px minmax(0,1fr);
   overflow:hidden;
@@ -462,15 +442,12 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
 }
 .reminder li{white-space:normal}
 
-/* 座位區也禁止內容撐破右欄 */
+
 .seat-card{overflow:hidden}
 .seats{min-width:0}
 .seat{min-width:0}
 
 
-/* ===== 最終視覺微調：右側標題一致＋考科重點色 ===== */
-
-/* 三個右側區塊標題統一 */
 .attendance .title,
 .reminder .title,
 .seat-card .title,
@@ -483,7 +460,7 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   letter-spacing:0 !important;
 }
 
-/* 座位表標題與黑板／座位之間增加垂直間距 */
+
 .seat-card .title,
 .seat-title,
 .seat-card h2,
@@ -491,14 +468,9 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   margin-bottom:18px !important;
 }
 
-/* 正式考科：暖橘色、稍加粗；非考科維持原本灰黑 */
-.schedule .exam-subject{
-  color:#b65f35 !important;
-  font-weight:800 !important;
-}
 
 
-/* ===== 考科顏色修正版 ===== */
+
 .schedule-row .exam-subject,
 .schedule .exam-subject,
 .exam-subject{
@@ -506,6 +478,8 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
   font-weight:800 !important;
 }
 
+
+.clock-card .clock{font-size:clamp(78px,6.5vw,112px)!important;line-height:1.05!important;letter-spacing:1px!important}
 </style>
 </head>
 <body>
@@ -539,9 +513,9 @@ header h1{font-size:22px;margin:0}.tag{border:1px solid #817d77;border-radius:22
       <div class="card reminder">
         <h2 class="title">導師叮嚀</h2>
         <ul>
-          <li>鐘響前：收妥課本、個人物品、淨空座位，提前入座</li>
-          <li>交卷前：再次檢查試卷及答案卡的班級、座號、姓名</li>
-          <li>鐘響後：立即停筆，等待監考老師清點試卷後再離座</li>
+          <li>考試前：確認考試用品、提前入座</li>
+          <li>交卷前：再確認班級、座號、姓名</li>
+          <li>考試結束：等待老師點完卷再離座</li>
         </ul>
       </div>
     </div>
@@ -706,7 +680,7 @@ renderSeats();updateAttendance();updateClock();setInterval(updateClock,1000);
 </script>
 
 <script>
-/* 考程正式考科重點色：自修、午餐打掃等生活時段不套色 */
+
 (function(){
   const nonExam = new Set(["自修","午餐、打掃","午餐打掃","午餐","打掃"]);
   function markExamSubjects(){
